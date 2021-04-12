@@ -66,11 +66,12 @@ export default function Room(props) {
         <div className="room" style={{ display: 'flex', justifyContent: 'center', flexDirection: 'column', alignItems: 'center' }}>
             <div className="buttons">
                 <Link to="/">
-                    <button className="back">
-                        חזרה
-                        <img src={require('../images/back.svg').default} alt="back" width="15em" style={{ paddingRight: '0.5em' }} />
-                    </button>
+                    <button className="back" style={{ backgroundImage: `url(${require('../images/back.svg').default})` }} />
                 </Link>
+                <div>
+                    <h3 id="name"> {props.name}</h3>
+                    <div className="room-div-type" style={{ backgroundImage: `url(${checkType(props.type)})` }} />
+                </div>
                 <button style={{ backgroundImage: `url(${require('../images/delete.svg').default})` }} className="delete" onClick={() => {
                     var con = window.confirm('אתה בטוח שהינך רוצה למחוק את החדר?');
                     if (con) {
@@ -78,8 +79,7 @@ export default function Room(props) {
                     }
                 }} />
             </div>
-            <h3 id="name"> {props.name}</h3>
-            <div className="room-div-type" style={{ backgroundImage: `url(${checkType(props.type)})` }} />
+
             <div className="products">
                 {props.products.length > 0 ? props.products.map((e, i) => {
                     return (
