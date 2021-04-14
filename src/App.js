@@ -1,34 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 import "./App.css";
-import { Switch, Route, useHistory } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 import AddRoom from "./component/AddRoom";
 import Rooms from "./component/Rooms";
 import Room from './component/Room';
+import { useSelector } from 'react-redux';
 
 export default function App() {
-    const history = useHistory();
-    const [rooms, setRooms] = useState([])
-
-    const addRoom = (n, t) => {
-        setRooms([...rooms, { name: n, type: t, products: [] }]);
-    }
-    const addProduct = (index, typeProduct) => {
-        let newProduct = { condition: false, type: typeProduct };
-        rooms[index].products.push(newProduct);
-        setRooms([...rooms]);
-        console.log(rooms);
-    }
-    const trunProduct = (room, product) => {
-        rooms[room].products[product].condition = !rooms[room].products[product].condition;
-        setRooms([...rooms])
-    }
-
-    const deleteRoom = (index) => {
-        let filterRooms = rooms.filter((e, i) => i !== index);
-        setRooms(filterRooms);
-        history.push('/')
-    }
-
+    const rooms = useSelector(state => state.rooms.rooms);
+    console.log(rooms);
     return (
         <div className="App" >
             <div className="top">
@@ -36,18 +16,18 @@ export default function App() {
             </div>
             <Switch>
                 <Route exact path="/" component={() => {
-                    return <Rooms rooms={rooms} />
+                    return <Rooms />
                 }} />
                 <Route exact path="/addRoom" component={() => {
-                    return <AddRoom add={addRoom} />
+                    return <AddRoom />
                 }} />
-                {rooms.map((e, index) => {
+                {rooms ? rooms.map((e, index) => {
                     return (
                         <Route key={index} exact path={`/room${e.name}`} component={() => {
-                            return <Room name={e.name} type={e.type} addP={addProduct} index={index} products={e.products} trunProduct={trunProduct} deleteRoom={deleteRoom} />
+                            return <Room index={index} />
                         }} />
                     )
-                })}
+                }) : ""}
             </Switch>
         </div>
     )

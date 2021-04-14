@@ -1,48 +1,46 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-export default class AddRoom extends Component {
-    constructor(props) {
-        super(props)
 
-        this.state = {
-            type: "",
-            name: "",
+import { addRoom } from '../action/index';
+import { useDispatch } from 'react-redux';
+export default function AddRoom(props) {
+    const dispatch = useDispatch();
+    const [type, setType] = useState('');
+    const [name, setName] = useState('');
+    const validType = (e) => {
+        setType(e.target.value)
+    }
+    const validName = (e) => {
+        let name = e.target.value;
+        if (name.match('[a-zA-Zא-ת]') && name.length >= 3) {
+            setName(name);
+        }
+        else {
+            setName('');
         }
     }
-    validType = (e) => {
-        this.setState({ type: e.target.value })
-    }
-    validName = (e) => {
+    return (
+        <div className="add-room">
+            <div className="form-add-room">
+                <h3>הוסף חדר</h3>
+                <select id="select-room" onChange={validType}>
+                    <option defaultValue>בחר סוג חדר:</option>
+                    <option value="Bath Room">שירותים</option>
+                    <option value="Living Room">סלון</option>
+                    <option value="Bed Room">חדר שינה</option>
+                    <option value="Kitchen">מטבח</option>
+                </select>
+                <input id="input-name" onChange={validName} placeholder="שם החדר:" autoComplete='off' />
+                <Link style={{ textDecoration: 'none' }} to="/">
+                    <button id="button-add-room" onClick={() => {
+                        if (type && name) {
+                            dispatch(addRoom({ name: name, type: type, products: [] }))
+                        } else {
+                            alert('שגיאה')
+                        }
 
-        this.setState({ name: e.target.value })
-
-    }
-    render() {
-        return (
-            <div className="add-room">
-                <div className="form-add-room">
-                    <h3>הוסף חדר</h3>
-                    <select id="select-room" onChange={this.validType}>
-                        <option defaultValue>בחר סוג חדר:</option>
-                        <option value="Bath Room">שירותים</option>
-                        <option value="Living Room">סלון</option>
-                        <option value="Bed Room">חדר שינה</option>
-                        <option value="Kitchen">מטבח</option>
-                    </select>
-                    <input id="input-name" onChange={this.validName} placeholder="שם החדר:" autoComplete='off' />
-                    <Link style={{ textDecoration: 'none' }} to="/">
-                        <button id="button-add-room" onClick={() => {
-                            let type = this.state.type;
-                            let name = this.state.name;
-                            if (type && name) {
-                                this.props.add(name, type);
-                            } else {
-                                alert('שגיאה')
-                            }
-
-                        }}><p>הוסף</p></button></Link>
-                </div>
+                    }}><p>הוסף</p></button></Link>
             </div>
-        )
-    }
+        </div>
+    )
 }

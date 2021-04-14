@@ -1,7 +1,7 @@
 body {
 	background-color: #4ba54b;
 	margin: 0px;
-	font-family: Arial, Helvetica, sans-serif;
+	font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 .App {
 	text-align: center;
@@ -35,7 +35,7 @@ body {
 	justify-content: space-evenly;
 }
 .room {
-	padding: 1em;
+	padding: 2em 1em 1em 1em;
 }
 #room {
 	width: 20em;
@@ -53,10 +53,11 @@ body {
 }
 #name-room {
 	background-color: aliceblue;
-	height: 1.5em;
+	height: 2.1em;
 	display: flex;
 	align-items: center;
-	padding: 0.4em;
+	flex-direction: column;
+	padding: 0.3em;
 	opacity: 0.6;
 	box-shadow: 0px 3px 3px gray, 0 0 3px;
 }
@@ -162,8 +163,10 @@ body {
 	outline: none;
 }
 .buttons {
+	width: 100%;
 	display: flex;
 	flex-direction: row;
+	justify-content: space-around;
 }
 .back {
 	height: 3.5em;
@@ -193,6 +196,12 @@ body {
 #name {
 	font-size: 2em;
 	letter-spacing: 0.05em;
+	background-color: aliceblue;
+	opacity: 0.7;
+	width: 80%;
+	margin: 0 auto;
+	margin-top: 2em;
+	color: rgba(20, 20, 114, 0.849);
 }
 .room-div-type {
 	width: 11em;
@@ -203,7 +212,7 @@ body {
 }
 .products {
 	display: flex;
-	flex-wrap: wrap;
+	flex-direction: column;
 	padding: 1em;
 	justify-content: center;
 }

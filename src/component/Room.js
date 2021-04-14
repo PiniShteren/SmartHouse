@@ -1,14 +1,21 @@
 import React, { useState } from 'react';
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import AddProduct from "./AddProduct";
 
+import { deleteRoom, trun } from '../action/index';
+import { useDispatch, useSelector } from "react-redux";
+
 export default function Room(props) {
+    const room = useSelector(state => state.rooms.rooms[props.index]);
+    const history = useHistory();
+    const dispatch = useDispatch()
     const [flag, setFlag] = useState(false);
+    const [local, setLocal] = useState(trun);
     const show = () => {
         if (flag) {
             return (
                 <div className="room">
-                    <AddProduct addP={props.addP} index={props.index} type={props.type} products={props.products} />
+                    <AddProduct index={props.index} changeFlag={change} />
                 </div>
             )
         } else {
@@ -62,6 +69,7 @@ export default function Room(props) {
                 return;
         }
     }
+
     return (
         <div className="room" style={{ display: 'flex', justifyContent: 'center', flexDirection: 'column', alignItems: 'center' }}>
             <div className="buttons">
@@ -69,22 +77,24 @@ export default function Room(props) {
                     <button className="back" style={{ backgroundImage: `url(${require('../images/back.svg').default})` }} />
                 </Link>
                 <div>
-                    <h3 id="name"> {props.name}</h3>
-                    <div className="room-div-type" style={{ backgroundImage: `url(${checkType(props.type)})` }} />
+                    <h3 id="name"> <span></span><span>{room.name}</span></h3>
+                    <div className="room-div-type" style={{ backgroundImage: `url(${checkType(room.type)})` }} />
                 </div>
                 <button style={{ backgroundImage: `url(${require('../images/delete.svg').default})` }} className="delete" onClick={() => {
                     var con = window.confirm('אתה בטוח שהינך רוצה למחוק את החדר?');
                     if (con) {
-                        props.deleteRoom(props.index)
+                        dispatch(deleteRoom(props.index));
+                        history.push('/');
                     }
                 }} />
             </div>
-
+            {room.products.length > 0 ? <p>לחץ כדי לכבות/להדליק מוצר</p> : ""}
             <div className="products">
-                {props.products.length > 0 ? props.products.map((e, i) => {
+                {room.products.length > 0 ? room.products.map((e, i) => {
                     return (
                         <div className="product" style={{ backgroundImage: `url(${checkImg(e.type, e.condition)})` }} onClick={() => {
-                            props.trunProduct(props.index, i)
+                            dispatch(trun(props.index, i));
+                            setLocal(!local)
                         }} key={i} value={i}>
                         </div>
                     )

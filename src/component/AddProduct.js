@@ -1,6 +1,12 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+
+import { addProduct } from "../action/index";
+import { useDispatch, useSelector } from 'react-redux';
 
 export default function AddProduct(props) {
+    const dispatch = useDispatch();
+    const room = useSelector(state => state.rooms.rooms[props.index]);
+    const products = room.products;
     const [displayNot, setDispalyNot] = useState('none');
     const [dispalyMax, setDisplayMax] = useState('none');
     const [product, setProduct] = useState('');
@@ -15,29 +21,36 @@ export default function AddProduct(props) {
                 <option value='stereo'>סטריאו</option>
                 <option value='air-conditioner'>מזגן</option>
                 <option value='lamp'>מנורה</option>
-                {props.type === "Bad Room" ? <option value='hot'>דוד שמש</option> : ''}
+                {room.type === "Bath Room" ? <option value='hot'>דוד שמש</option> : ''}
             </select>
 
             <button id="button-add-product" onClick={() => {
-                if (props.products.length === 5) {
-                    setDisplayMax('');
-                    return;
-                }
                 if (product) {
+                    if (!products) {
+                        dispatch(addProduct(props.index, product));
+                        props.changeFlag();
+                        return;
+                    }
+                    if (products.length === 5) {
+                        setDisplayMax('');
+                        return;
+                    }
+
                     var flag = false;
-                    props.products.forEach((e) => {
+                    products.forEach((e) => {
                         if (e.type === product && e.type === 'hot') {
-                            debugger
                             flag = true;
                         }
                     })
-                    if (!flag) {
-                        props.addP(props.index, product)
-                    } else {
+                    if (flag) {
                         setDispalyNot('');
+                    } else {
+                        dispatch(addProduct(props.index, product));
+                        props.changeFlag();
                     }
                 }
-            }} >הוסף</button>
+            }
+            } >הוסף</button>
 
         </div >
     )
