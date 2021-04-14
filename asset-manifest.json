@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/SmartHouse/static/css/main.9115e534.chunk.css",
-    "main.js": "/SmartHouse/static/js/main.718611cc.chunk.js",
-    "main.js.map": "/SmartHouse/static/js/main.718611cc.chunk.js.map",
+    "main.css": "/SmartHouse/static/css/main.0c5b8694.chunk.css",
+    "main.js": "/SmartHouse/static/js/main.2a609de7.chunk.js",
+    "main.js.map": "/SmartHouse/static/js/main.2a609de7.chunk.js.map",
     "runtime-main.js": "/SmartHouse/static/js/runtime-main.6b6258be.js",
     "runtime-main.js.map": "/SmartHouse/static/js/runtime-main.6b6258be.js.map",
-    "static/js/2.4ad504b3.chunk.js": "/SmartHouse/static/js/2.4ad504b3.chunk.js",
-    "static/js/2.4ad504b3.chunk.js.map": "/SmartHouse/static/js/2.4ad504b3.chunk.js.map",
+    "static/js/2.9bcacfdc.chunk.js": "/SmartHouse/static/js/2.9bcacfdc.chunk.js",
+    "static/js/2.9bcacfdc.chunk.js.map": "/SmartHouse/static/js/2.9bcacfdc.chunk.js.map",
     "index.html": "/SmartHouse/index.html",
-    "static/css/main.9115e534.chunk.css.map": "/SmartHouse/static/css/main.9115e534.chunk.css.map",
-    "static/js/2.4ad504b3.chunk.js.LICENSE.txt": "/SmartHouse/static/js/2.4ad504b3.chunk.js.LICENSE.txt",
+    "static/css/main.0c5b8694.chunk.css.map": "/SmartHouse/static/css/main.0c5b8694.chunk.css.map",
+    "static/js/2.9bcacfdc.chunk.js.LICENSE.txt": "/SmartHouse/static/js/2.9bcacfdc.chunk.js.LICENSE.txt",
     "static/media/air-conditioner.svg": "/SmartHouse/static/media/air-conditioner.63396eca.svg",
     "static/media/back.svg": "/SmartHouse/static/media/back.82516f76.svg",
     "static/media/bath.svg": "/SmartHouse/static/media/bath.50fea0d5.svg",
@@ -23,8 +23,8 @@
   },
   "entrypoints": [
     "static/js/runtime-main.6b6258be.js",
-    "static/js/2.4ad504b3.chunk.js",
-    "static/css/main.9115e534.chunk.css",
-    "static/js/main.718611cc.chunk.js"
+    "static/js/2.9bcacfdc.chunk.js",
+    "static/css/main.0c5b8694.chunk.css",
+    "static/js/main.2a609de7.chunk.js"
   ]
 }
